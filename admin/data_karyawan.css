@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(140deg, #71b7e6, #252424);
+}
+
+header {
+    background-color: #7f8181;
+    color: #fff;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+button {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+table th {
+    background: linear-gradient(140deg, #71b7e6, #252424);
+    font-weight: bold;
+    text-align: left;
+}
+
+table td {
+    text-align: center;
+}
+
+
+.edit-btn {
+    padding: 5px 10px;
+    background-color: blue;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer; 
+}
+.delete-btn {
+    padding: 5px 10px;
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer; 
+}
+.add-btn {
+    padding: 5px 10px;
+    background-color: rgb(6, 204, 6);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer; 
+}
+
+.add-btn:hover {
+    background-color: #67b6ff;
+}

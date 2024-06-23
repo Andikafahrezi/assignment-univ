@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola Daftar Antrian</title>
+    <link rel="stylesheet" href="manage_queue.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="logo">
+        <a href="dashboard.html">
+          <img src="logo.png" alt="Car Wash" />
+        </a>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Kelola Daftar Antrian</h2>
+      <div class="queue">
+        <!-- Daftar antrian akan dimuat di sini -->
+      </div>
+    </div>
+
+    <script>
+      // Data antrian dummy
+      const queue = [
+        {
+          id: 1,
+          name: "John Doe",
+          phone: "123-456-7890",
+          carModel: "SUV",
+          service: "Cuci Steam Basic",
+          price: "Rp 50.000",
+          status: "Menunggu",
+        },
+        {
+          id: 2,
+          name: "Jane Smith",
+          phone: "098-765-4321",
+          carModel: "Sedan",
+          service: "Cuci Steam Premium",
+          price: "Rp 100.000",
+          status: "Menunggu",
+        },
+      ];
+
+        function loadQueue() {
+            const queueContainer = document.querySelector(".queue");
+            queueContainer.innerHTML = "";
+
+            queue.forEach((item) => {
+            const queueItem = document.createElement("div");
+            queueItem.classList.add("queue-item");
+            queueItem.innerHTML = `
+                    <p><strong>Nama:</strong> ${item.name}</p>
+                    <p><strong>Nomor Telepon:</strong> ${item.phone}</p>
+                    <p><strong>Model Mobil:</strong> ${item.carModel}</p>
+                    <p><strong>Layanan:</strong> ${item.service}</p>
+                    <p><strong>Harga:</strong> ${item.price}</p>
+                    <p><strong>Status:</strong> ${item.status}</p>
+                    <button onclick="updateStatus(${item.id})">Update Status</button>
+                `;
+            queueContainer.appendChild(queueItem);
+            });
+        }
+
+        function updateStatus(itemId) {
+            // Temukan item dalam antrian berdasarkan ID
+            const item = queue.find((item) => item.id === itemId);
+            if (item) {
+            // Tampilkan dialog atau fungsi untuk mengubah status
+            const newStatus = prompt("Masukkan status baru:");
+            if (newStatus) {
+                item.status = newStatus;
+
+                loadQueue(); // Perbarui daftar antrian setelah mengubah status
+            }
+            }
+        }
+
+        // Muat daftar antrian saat halaman dimuat
+        window.onload = loadQueue;
+    </script>
+  </body>
+</html>

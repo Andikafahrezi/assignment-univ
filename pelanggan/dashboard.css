@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #71b7e6, #252424);
+}
+
+.topbar {
+    background-color: #4eb8ff;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+}
+
+.search input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.user i {
+    cursor: pointer;
+}
+
+
+.kelompok9 {
+    background-color: #252424;
+    color: white;
+    width: 200px;
+    height: calc(100vh - 50px); 
+    position: fixed;
+    top: 50px;
+    left: 0;
+    overflow-y: auto;
+}
+
+.kelompok9 ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.kelompok9 ul li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #444;
+}
+
+.kelompok9 ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.kelompok9 ul li a i {
+    margin-right: 10px;
+}
+
+.kelompok9 ul li:hover {
+    background-color: #575757;
+}
+
+
+.main {
+    margin-left: 200px; 
+    padding: 20px;
+    background-image: url('logo.webp');
+    background-size: cover;
+    background-position: center;
+    height: calc(90vh - 40px); 
+    color: white; 
+}
+
+.main section {
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main section h1 {
+    margin-top: 0;
+}
+
+.main section p {
+    margin-bottom: 20px;
+}
+
+.main section img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+}

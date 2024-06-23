@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulasan Dikirim</title>
+    <link rel="stylesheet" href="submit_review.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Terima Kasih atas Ulasan Anda!</h2>
+        <p>Rating: <span id="user-rating"></span></p>
+        <p>Ulasan:</p>
+        <p id="user-review"></p>
+        <button onclick="goBack()">Kembali ke Dashboard</button>
+    </div>
+
+    <script>
+        // Mendapatkan parameter dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Mendapatkan nilai dari parameter
+        const rating = urlParams.get('rating');
+        const review = urlParams.get('review');
+        
+        // Menampilkan nilai parameter ke dalam elemen HTML
+        if (rating && review) {
+            document.getElementById('user-rating').textContent = rating;
+            document.getElementById('user-review').textContent = review;
+        } else {
+            document.getElementById('user-rating').textContent = "Tidak ada rating";
+            document.getElementById('user-review').textContent = "Tidak ada ulasan";
+        }
+
+        function goBack() {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

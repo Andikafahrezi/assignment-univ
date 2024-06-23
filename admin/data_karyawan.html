@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - Kelola Data Karyawan</title>
+<link rel="stylesheet" href="data_karyawan.css" /> <!-- Pastikan untuk menambahkan stylesheet jika diperlukan -->
+</head>
+<body>
+<header>
+    <h1>Admin</h1>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Home</a></li>
+            <li><a href="transaksi.html">Laporan Transaksi</a></li>
+            <li><a href="kelola_layanan.html">Kelola Layanan</a></li>
+            <li><a href="feedback.html">Kelola Ulasan</a></li>
+            <li><a href="logout.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h2>Kelola Data Karyawan</h2>
+    <button onclick="window.location.href='tambah_karyawan.html'" class="add-btn">
+        Tambah Karyawan
+    </button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama Karyawan</th>
+                <th>Gaji</th>
+                <th>Email</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="transactionTableBody">
+            <!-- Isi tabel karyawan akan dimasukkan di sini -->
+        </tbody>
+    </table>
+</main>
+<script>
+    // Data karyawan dummy
+    const karyawan = [
+        { id: 1, nama: "John Doe", gaji: "Rp 150.000", email: "john.doe@example.com" },
+        { id: 2, nama: "Jane Smith", gaji: "Rp 200.000", email: "jane.smith@example.com" },
+        { id: 3, nama: "Slamet", gaji: "Rp 150.000", email: "slamet@example.com" }
+    ];
+
+    function loadKaryawan() {
+        const tableBody = document.getElementById("transactionTableBody");
+        tableBody.innerHTML = "";
+
+        karyawan.forEach((karyawan) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${karyawan.id}</td>
+                <td>${karyawan.nama}</td>
+                <td>${karyawan.gaji}</td>
+                <td>${karyawan.email}</td>
+                <td>
+                   <button class="edit-btn" onclick="location.href='edit_karyawan.html?id=${karyawan.id}';">Edit</button>
+                    <button class="delete-btn" onclick="deleteKaryawan(${karyawan.id})">Delete</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function deleteKaryawan(karyawanId) {
+        const index = karyawan.findIndex(k => k.id === karyawanId);
+        if (index !== -1) {
+            karyawan.splice(index, 1);
+            loadKaryawan(); // Memuat ulang data karyawan setelah penghapusan
+            alert('Karyawan berhasil dihapus.');
+        } else {
+            alert('Karyawan tidak ditemukan.');
+        }
+    }
+
+    // Memuat data karyawan saat halaman dimuat
+    window.onload = loadKaryawan;
+</script>
+</body>
+</html>

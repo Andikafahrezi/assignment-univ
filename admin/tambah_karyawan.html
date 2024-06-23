@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - Tambah Karyawan</title>
+<link rel="stylesheet" href="data_karyawan.css"> <!-- Jika ada stylesheet khusus untuk halaman ini -->
+<style>
+    /* CSS tambahan bisa ditambahkan di sini sesuai kebutuhan */
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+    h1, h2 {
+        margin-bottom: 20px;
+    }
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    input[type="text"], input[type="email"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Admin</h1>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Home</a></li>
+            <li><a href="transaksi.html">Laporan Transaksi</a></li>
+            <li><a href="kelola_layanan.html">Kelola Layanan</a></li>
+            <li><a href="feedback.html">Kelola Ulasan</a></li>
+            <li><a href="logout.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h2>Tambah Karyawan Baru</h2>
+    <form id="tambahForm">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama" required>
+        <label for="gaji">Gaji:</label>
+        <input type="text" id="gaji" name="gaji" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Tambah Karyawan</button>
+    </form>
+</main>
+<script>
+    // Data karyawan dummy (untuk simulasi)
+    let karyawan = [
+        { id: 1, nama: "John Doe", gaji: "Rp 150.000", email: "john.doe@example.com" },
+        { id: 2, nama: "Jane Smith", gaji: "Rp 200.000", email: "jane.smith@example.com" },
+        { id: 3, nama: "Slamet", gaji: "Rp 150.000", email: "slamet@example.com" }
+    ];
+
+    // Fungsi untuk menambahkan karyawan baru
+    function tambahKaryawan(event) {
+        event.preventDefault(); // Menghentikan pengiriman form secara default
+
+        // Mengambil nilai dari input form
+        const nama = document.getElementById('nama').value;
+        const gaji = document.getElementById('gaji').value;
+        const email = document.getElementById('email').value;
+
+        // Membuat objek karyawan baru
+        const idTerbaru = karyawan.length + 1; // Sementara ini gunakan panjang array + 1
+        const karyawanBaru = {
+            id: idTerbaru,
+            nama: nama,
+            gaji: gaji,
+            email: email
+        };
+
+        // Menambahkan karyawan baru ke dalam array
+        karyawan.push(karyawanBaru);
+
+        // Menampilkan pesan sukses
+        alert('Karyawan baru berhasil ditambahkan.');
+
+        // Mengosongkan nilai input form setelah ditambahkan
+        document.getElementById('nama').value = '';
+        document.getElementById('gaji').value = '';
+        document.getElementById('email').value = '';
+    }
+
+    // Mendapatkan referensi form dan menambahkan event listener
+    const tambahForm = document.getElementById('tambahForm');
+    tambahForm.addEventListener('submit', tambahKaryawan);
+</script>
+</body>
+</html>

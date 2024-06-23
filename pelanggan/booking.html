@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pemesanan Cuci Steam</title>
+    <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo">
+          <a href="dashboard.html">
+            <img src="logo.png" alt="Car Wash" />
+          </a>
+        </div>
+      </div>
+    <div class="booking-container">
+        <h2>Formulir Pemesanan</h2>
+        <form action="process_booking.html" method="GET">
+            <label for="name">Nama Lengkap:</label>
+            <input type="text" id="name" name="name" required><br><br>
+        
+            <label for="phone">Nomor Telepon:</label>
+            <input type="text" id="phone" name="phone" required><br><br>
+        
+            <label for="car_model">Model Mobil:</label>
+            <select id="car_model" name="car_model" required>
+                <option value="convertible">Convertible</option>
+                <option value="pickup">Pick-Up</option>
+                <option value="offroader">Off Roader</option>
+                <option value="minibus">Mini Bus</option>
+                <option value="suv">SUV</option>
+            </select><br><br>
+        
+            <label for="service">Layanan:</label>
+            <select id="service" name="service" required>
+                <option value="basic">Cuci Steam Basic - Rp 100.000</option>
+                <option value="premium">Cuci Steam Premium - Rp 150.000</option>
+            </select><br><br>
+        
+            <button type="submit">Pesan Sekarang</button>
+        </form>
+    </div>
+</body>
+</html>

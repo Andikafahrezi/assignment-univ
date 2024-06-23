@@ -1,0 +1,135 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Mengelola Ulasan Pelanggan</title>
+    <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+    <header>
+        <h1>Admin</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="data_karyawan.html">Data Karyawan</a></li>
+                <li><a href="transaksi.html">Laporan Transaksi</a></li>
+                <li><a href="kelola_layanan.html"> Kelola Layanan</a></li>
+                <li><a href="logout.html"> Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Mengelola Ulasan Pelanggan</h2>
+        <div class="review-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Rating</th>
+                        <th>Ulasan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="review-table-body">
+                    <!-- Data ulasan akan diisi di sini -->
+                </tbody>
+            </table>
+        </div>
+        <div class="form-container">
+            <h3>Tambah/Edit Ulasan</h3>
+            <form id="review-form">
+                <input type="hidden" id="review-id">
+                <div class="form-group">
+                    <label for="name">Nama:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating:</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="review">Ulasan:</label>
+                    <textarea id="review" name="review" required></textarea>
+                </div>
+                <button type="submit">Simpan</button>
+            </form>
+        </div>
+    </main>
+    <script>
+        const reviewTableBody = document.getElementById('review-table-body');
+        const reviewForm = document.getElementById('review-form');
+        let reviewData = [];
+
+        reviewForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const id = document.getElementById('review-id').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const rating = document.getElementById('rating').value;
+            const review = document.getElementById('review').value;
+
+            if (id) {
+                updateReview(id, name, email, rating, review);
+            } else {
+                addReview(name, email, rating, review);
+            }
+            reviewForm.reset();
+        });
+
+        function addReview(name, email, rating, review) {
+            const id = Date.now().toString();
+            reviewData.push({ id, name, email, rating, review });
+            renderReviewTable();
+        }
+
+        function updateReview(id, name, email, rating, review) {
+            const reviewItem = reviewData.find(item => item.id === id);
+            reviewItem.name = name;
+            reviewItem.email = email;
+            reviewItem.rating = rating;
+            reviewItem.review = review;
+            renderReviewTable();
+        }
+
+        function editReview(id) {
+            const reviewItem = reviewData.find(item => item.id === id);
+            document.getElementById('review-id').value = reviewItem.id;
+            document.getElementById('name').value = reviewItem.name;
+            document.getElementById('email').value = reviewItem.email;
+            document.getElementById('rating').value = reviewItem.rating;
+            document.getElementById('review').value = reviewItem.review;
+        }
+
+        function deleteReview(id) {
+            reviewData = reviewData.filter(item => item.id !== id);
+            renderReviewTable();
+        }
+
+        function renderReviewTable() {
+            reviewTableBody.innerHTML = '';
+            reviewData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.email}</td>
+                    <td>${item.rating}</td>
+                    <td>${item.review}</td>
+                    <td>
+                        <button onclick="editReview('${item.id}')">Edit</button>
+                        <button onclick="deleteReview('${item.id}')">Hapus</button>
+                    </td>
+                `;
+                reviewTableBody.appendChild(row);
+            });
+        }
+
+        // Render the table for the first time
+        renderReviewTable();
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terima Pesanan</title>
+    <link rel="stylesheet" href="order.css">
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo">
+          <a href="dashboard.html">
+            <img src="logo.png" alt="Car Wash" />
+          </a>
+        </div>
+      </div>
+    <div class="container">
+        <h2>Daftar Pesanan</h2>
+        <div class="orders">
+            <!-- Pesanan akan dimuat di sini melalui JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Data pesanan dummy
+        const orders = [
+            { id: 1, name: 'John Doe', phone: '123-456-7890', carModel: 'SUV', service: 'Cuci Steam Basic', price: 'Rp 50.000' },
+            { id: 2, name: 'Jane Smith', phone: '098-765-4321', carModel: 'Sedan', service: 'Cuci Steam Premium', price: 'Rp 100.000' }
+        ];
+
+        function loadOrders() {
+            const ordersContainer = document.querySelector('.orders');
+            ordersContainer.innerHTML = '';
+
+            orders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.classList.add('order');
+                orderElement.innerHTML = `
+                    <p><strong>Nama:</strong> ${order.name}</p>
+                    <p><strong>Nomor Telepon:</strong> ${order.phone}</p>
+                    <p><strong>Model Mobil:</strong> ${order.carModel}</p>
+                    <p><strong>Layanan:</strong> ${order.service}</p>
+                    <p><strong>Harga:</strong> ${order.price}</p>
+                    <button onclick="acceptOrder(${order.id})">Terima Pesanan</button>
+                `;
+                ordersContainer.appendChild(orderElement);
+            });
+        }
+
+        function acceptOrder(orderId) {
+            // Cari pesanan berdasarkan ID
+            const order = orders.find(order => order.id === orderId);
+            if (order) {
+                alert(`Pesanan atas nama ${order.name} telah diterima.`);
+                // Hapus pesanan dari daftar
+                const index = orders.indexOf(order);
+                orders.splice(index, 1);
+                // Muat ulang daftar pesanan
+                loadOrders();
+            }
+        }
+
+        // Muat pesanan saat halaman dimuat
+        window.onload = loadOrders;
+    </script>
+</body>
+</html>

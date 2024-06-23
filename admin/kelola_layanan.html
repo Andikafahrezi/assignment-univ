@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Kelola Layanan</title>
+    <link rel="stylesheet" href="kelola_layanan.css">
+</head>
+<body>
+    <header>
+        <h1>Admin</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="transaksi.html">Laporan Transaksi</a></li>
+                <li><a href="data_karyawan.html">Data Karyawan</a></li>                    
+                <li><a href="feedback.html">Kelola Ulasan</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Kelola Layanan</h2>
+        <button onclick="window.location.href='tambah_layanan.html'">Tambah Layanan</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Layanan</th>
+                    <th>Nama Layanan</th>
+                    <th>Harga</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Cuci Mobil Biasa</td>
+                    <td>Rp 100.000</td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <!-- Data lainnya disini -->
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

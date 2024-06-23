@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Data Karyawan</title>
+<link rel="stylesheet" href="edit_karyawan.css"> <!-- Jika ada stylesheet khusus untuk halaman ini -->
+</head>
+<body>
+    <h2>Edit Data Karyawan</h2>
+    <form id="editForm">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama" required>
+        <label for="gaji">Gaji:</label>
+        <input type="text" id="gaji" name="gaji" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="button" onclick="simpanPerubahan()">Simpan Perubahan</button>
+    </form>
+
+    <script>
+        // Data karyawan dummy (sebagai contoh)
+        const karyawan = [
+            { id: 1, nama: "John Doe", gaji: "Rp 150.000", email: "john.doe@example.com" },
+            { id: 2, nama: "Jane Smith", gaji: "Rp 200.000", email: "jane.smith@example.com" },
+            { id: 3, nama: "Slamet", gaji: "Rp 150.000", email: "slamet@example.com" }
+        ];
+
+        // Mendapatkan ID karyawan dari parameter URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const karyawanId = parseInt(urlParams.get('id'));
+
+        // Fungsi untuk mengisi form dengan data karyawan yang sesuai dengan ID
+        function isiForm() {
+            const karyawanData = karyawan.find(k => k.id === karyawanId);
+            if (karyawanData) {
+                document.getElementById('nama').value = karyawanData.nama;
+                document.getElementById('gaji').value = karyawanData.gaji;
+                document.getElementById('email').value = karyawanData.email;
+            } else {
+                alert('Karyawan tidak ditemukan.');
+                window.location.href = 'index.html'; // Redirect ke halaman utama jika karyawan tidak ditemukan
+            }
+        }
+
+        // Fungsi untuk menyimpan perubahan pada data karyawan
+        function simpanPerubahan() {
+            const nama = document.getElementById('nama').value;
+            const gaji = document.getElementById('gaji').value;
+            const email = document.getElementById('email').value;
+
+            // Update data karyawan di array (simulasi)
+            const index = karyawan.findIndex(k => k.id === karyawanId);
+            if (index !== -1) {
+                karyawan[index].nama = nama;
+                karyawan[index].gaji = gaji;
+                karyawan[index].email = email;
+                alert('Data karyawan berhasil diubah.');
+                // Redirect kembali ke halaman utama setelah penyimpanan berhasil
+                window.location.href = 'data_karyawan.html';
+            } else {
+                alert('Karyawan tidak ditemukan.');
+            }
+        }
+
+        // Memanggil fungsi isiForm saat halaman dimuat
+        window.onload = isiForm;
+    </script>
+</body>
+</html>

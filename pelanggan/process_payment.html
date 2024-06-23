@@ -1,0 +1,35 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Berhasil</title>
+    <link rel="stylesheet" href="process_payment.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Pembayaran Berhasil</h2>
+        <p>Terima kasih atas pembayaran Anda!</p>
+        <p>Detail Pembayaran:</p>
+        <ul>
+            <li>Jumlah: <span id="payment-amount"></span></li>
+            <li>Metode Pembayaran: <span id="payment-method"></span></li>
+        </ul>
+        <button onclick="window.location.href='dashboard.html'">Kembali ke Dashboard</button>
+    </div>
+
+    <script>
+        // Mendapatkan parameter dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Mendapatkan nilai dari parameter
+        const amount = urlParams.get('amount');
+        const method = urlParams.get('method');
+        const status = urlParams.get('status');
+
+        // Menampilkan nilai parameter ke dalam elemen HTML
+        document.getElementById('payment-amount').textContent = amount;
+        document.getElementById('payment-method').textContent = method;
+        document.getElementById('payment-status').textContent = status;
+    </script>
+</body>
+</html>

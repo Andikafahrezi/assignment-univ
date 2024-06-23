@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Berhasil</title>
+    <link rel="stylesheet" href="process_booking.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Pemesanan Berhasil</h2>
+        <p>Terima kasih, <span id="user-name"></span>!</p>
+        <p>Pesanan Anda telah berhasil diterima. Kami akan segera menghubungi Anda untuk konfirmasi lebih lanjut.</p>
+        <p>Detail Pesanan:</p>
+        <ul>
+            <li>Nama: <span id="detail-name"></span></li>
+            <li>Nomor Telepon: <span id="detail-phone"></span></li>
+            <li>Model Mobil: <span id="detail-car-model"></span></li>
+            <li>Layanan: <span id="detail-service"></span></li>
+            <li>Nomor Antrian: <span id="queue-number"></span></li>
+        </ul>
+        <button onclick="window.location.href='dashboard.html'">Kembali ke Halaman Utama</button>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        const name = urlParams.get('name');
+        const phone = urlParams.get('phone');
+        const carModel = urlParams.get('car_model');
+        const service = urlParams.get('service');
+
+        document.getElementById('user-name').textContent = name;
+        document.getElementById('detail-name').textContent = name;
+        document.getElementById('detail-phone').textContent = phone;
+        document.getElementById('detail-car-model').textContent = carModel;
+        document.getElementById('detail-service').textContent = service === 'basic' ? 'Cuci Steam Basic - Rp 50.000' : 'Cuci Steam Premium - Rp 100.000';
+        
+        // Mendapatkan nomor antrian terakhir dari localStorage
+        let lastQueueNumber = localStorage.getItem('lastQueueNumber');
+        if (lastQueueNumber === null) {
+            lastQueueNumber = 0;
+        } else {
+            lastQueueNumber = parseInt(lastQueueNumber);
+        }
+
+        // Nomor antrian saat ini
+        const currentQueueNumber = lastQueueNumber + 1;
+        document.getElementById('queue-number').textContent = currentQueueNumber;
+
+        // Simpan nomor antrian saat ini ke localStorage
+        localStorage.setItem('lastQueueNumber', currentQueueNumber);
+
+        const bookingData = {
+            date: new Date().toLocaleString(),
+            name: name,
+            phone: phone,
+            carModel: carModel,
+            service: service,
+            queueNumber: currentQueueNumber
+        };
+
+        let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        bookings.push(bookingData);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+    </script>
+</body>
+</html>

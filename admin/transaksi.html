@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Kelola Transaksi</title>
+    <link rel="stylesheet" href="transaksi.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Admin</h1>
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">Home</a></li>
+          <li><a href="data_karyawan.html">Data Karyawan</a></li>
+          <li><a href="kelola_layanan.html">Kelola Layanan</a></li>
+          <li><a href="feedback.html">Kelola Ulasan</a></li>
+          <li><a href="logout.html">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2>Kelola Transaksi</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Transaksi</th>
+            <th>Nama Pelanggan</th>
+            <th>Tanggal</th>
+            <th>Total</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="transactionTableBody">
+          <tr>
+            <td>1</td>
+            <td>John Doe</td>
+            <td>2023-05-10</td>
+            <td>Rp 150.000</td>
+            <td>
+              <button class="edit-btn" onclick="editTransaction(1)">
+                Edit
+              </button>
+              <button class="delete-btn" onclick="deleteTransaction(1)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <script>
+      // Data transaksi dummy
+      const transactions = [
+        { id: 1, name: "John Doe", date: "2024-05-10", amount: "Rp 150.000" },
+        { id: 2, name: "Jane Smith", date: "2024-05-11", amount: "Rp 200.000" },
+        { id: 3, name: "Slamet", date: "2024-05-11", amount: "Rp 150.000" },
+      ];
+
+      function loadTransactions() {
+        const transactionTableBody = document.getElementById(
+          "transactionTableBody"
+        );
+        transactionTableBody.innerHTML = "";
+
+        transactions.forEach((transaction) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${transaction.id}</td>
+                    <td>${transaction.name}</td>
+                    <td>${transaction.date}</td>
+                    <td>${transaction.amount}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editTransaction(${transaction.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteTransaction(${transaction.id})">Delete</button>
+                    </td>
+                `;
+          transactionTableBody.appendChild(row);
+        });
+      }
+
+      function editTransaction(transactionId) {
+        const transaction = transactions.find((t) => t.id === transactionId);
+        if (transaction) {
+          const newAmount = prompt("Masukkan jumlah baru:", transaction.amount);
+          if (newAmount !== null) {
+            transaction.amount = newAmount;
+            alert('Data transaksi berhasil diubah.');
+            loadTransactions();
+            
+          }
+        }
+      }
+
+      function deleteTransaction(transactionId) {
+        const transactionIndex = transactions.findIndex(
+          (t) => t.id === transactionId
+        );
+        if (transactionIndex !== -1) {
+          transactions.splice(transactionIndex, 1);
+          alert('Data transaksi berhasil dihapus.');
+          loadTransactions();
+        }
+      }
+
+      window.onload = loadTransactions;
+    </script>
+  </body>
+</html>

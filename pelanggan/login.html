@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Pelanggan</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Login Pelanggan</h2>
+      <form action="dashboard.html" method="POST">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Login</button>
+        <p>Belum punya akun? <a href="registrasi.html">Daftar di sini</a></p>
+      </form>
+    </div>
+    <script>
+      function Login() {
+        var user = document.getElementById("email").value;
+        var pass = document.getElementById("password").value;
+
+        if (user == "user@gmail.com" && passw == "123") {
+          alert("Selamat anda berhasil login");
+        } else {
+          alert("Username dan password anda salah!");
+        }
+      }
+    </script>
+  </body>
+</html>

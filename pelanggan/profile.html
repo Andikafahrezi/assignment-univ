@@ -1,0 +1,132 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Pelanggan</title>
+    <link rel="stylesheet" href="profile.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="logo">
+        <a href="dashboard.html">
+          <img src="logo.png" alt="Car Wash" />
+        </a>
+      </div>
+    </div>
+    <div class="container">
+      <h1>Profil Pelanggan</h1>
+      <div class="section">
+        <h2>Data Diri</h2>
+        <p>Nama: <span id="user-name">Johny</span></p>
+        <p>Email: <span id="user-email">johny@example.com</span></p>
+        <p>Nomor Telepon: <span id="user-phone">123-456-7890</span></p>
+        <button onclick="editProfile()">Ubah Data</button>
+      </div>
+      <div class="section">
+        <h2>Riwayat Pemesanan</h2>
+        <ul id="booking-history"></ul>
+      </div>
+      <div class="section">
+        <h2>Riwayat Pembayaran</h2>
+        <ul id="payment-history"></ul>
+      </div>
+    </div>
+
+    <div id="edit-profile-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Ubah Data Pelanggan</h2>
+        <form id="edit-profile-form">
+          <label for="edit-name">Nama Lengkap:</label>
+          <input
+            type="text"
+            id="edit-name"
+            name="edit-name"
+            required
+          /><br /><br />
+          <label for="edit-email">Email:</label>
+          <input
+            type="email"
+            id="edit-email"
+            name="edit-email"
+            required
+          /><br /><br />
+          <label for="edit-phone">Nomor Telepon:</label>
+          <input
+            type="text"
+            id="edit-phone"
+            name="edit-phone"
+            required
+          /><br /><br />
+          <button type="submit">Simpan Perubahan</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const bookingData = [
+        { date: "2024-05-21", service: "Cuci Steam Basic" },
+        { date: "2024-05-25", service: "Cuci Steam Premium" },
+      ];
+
+      const paymentData = [
+        {
+          date: "2024-05-21",
+          amount: "Rp 100.000",
+          method: "Kartu Kredit",
+          status: "Completed",
+        },
+        {
+          date: "2024-05-25",
+          amount: "Rp 150.000",
+          method: "PayPal",
+          status: "Completed",
+        },
+      ];
+
+      function displayHistory(data, elementId) {
+        const container = document.getElementById(elementId);
+        container.innerHTML = "";
+        data.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.date} - ${Object.values(item)
+            .slice(1)
+            .join(", ")}`;
+          container.appendChild(li);
+        });
+      }
+
+      function editProfile() {
+        document.getElementById("edit-name").value =
+          document.getElementById("user-name").textContent;
+        document.getElementById("edit-email").value =
+          document.getElementById("user-email").textContent;
+        document.getElementById("edit-phone").value =
+          document.getElementById("user-phone").textContent;
+        document.getElementById("edit-profile-modal").style.display = "block";
+      }
+
+      function closeModal() {
+        document.getElementById("edit-profile-modal").style.display = "none";
+      }
+
+      document
+        .getElementById("edit-profile-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          document.getElementById("user-name").textContent =
+            document.getElementById("edit-name").value;
+          document.getElementById("user-email").textContent =
+            document.getElementById("edit-email").value;
+          document.getElementById("user-phone").textContent =
+            document.getElementById("edit-phone").value;
+          closeModal();
+        });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        displayHistory(bookingData, "booking-history");
+        displayHistory(paymentData, "payment-history");
+      });
+    </script>
+  </body>
+</html>
